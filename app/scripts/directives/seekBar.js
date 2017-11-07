@@ -8,7 +8,8 @@
       offsetXPercent = Math.max(0, offsetXPercent);
       offsetXPercent = Math.min(1, offsetXPercent);
       return offsetXPercent;
-    }
+    };
+
     return {
       templateUrl: '/templates/directives/seek_bar.html',
       replace: true,
@@ -16,7 +17,7 @@
       scope: {},
       link: function(scope, element, attributes) {
         scope.value = 0;
-        scope.max = 0;
+        scope.max = 100;
 
         var seekBar = $(element);
 
@@ -29,6 +30,11 @@
 
         scope.fillStyle = function() {
           return {width: percentString()};
+        };
+      
+
+        scope.thumbStyle = function() {
+          return {left: percentString()};
         };
 
         scope.onClickSeekBar = function(event) {
@@ -50,7 +56,7 @@
           });
         };
       }
-    };
+    }
   }
 
   angular
