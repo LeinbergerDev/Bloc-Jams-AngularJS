@@ -43,7 +43,8 @@
       }
       currentBuzzObject = new buzz.sound(song.audioUrl, {
         formats: ['mp3'],
-        preload: true
+        preload: true,
+        autoplay: true
       });
 
       currentBuzzObject.bind('timeupdate', function() {
@@ -81,6 +82,8 @@
     */
     SongPlayer.volume = null;
 
+
+
     /**
     * @desc public method to play selected song
     * @param {Object} song
@@ -92,6 +95,20 @@
         playSong(song);
       }
     };
+
+    /**
+    * @desc public method to test if the song has ended.  signals to run the next song
+    */
+
+    SongPlayer.isEnded = function () {
+      if (currentBuzzObject){
+        if(currentBuzzObject.isEnded()) {
+          SongPlayer.next();
+        }
+      }
+    };
+
+    
 
     /**
     * @desc public method to pause selected song
@@ -149,7 +166,6 @@
     * @param {number} volume
     */
     SongPlayer.setVolume = function(volume) {
-      console.log(volume)
       currentBuzzObject.setVolume(volume);
     };
 

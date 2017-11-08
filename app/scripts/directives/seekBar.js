@@ -20,6 +20,7 @@
       link: function(scope, element, attributes) {
         scope.value = 0;
         scope.max = 100;
+        scope.isEnded = false;
 
         var seekBar = $(element);
 
@@ -29,6 +30,10 @@
 
         attributes.$observe('max', function(newValue) {
           scope.max = newValue;
+        });
+
+        attributes.$observe('isEnded', function(newValue){
+          scope.isEnded = newValue;
         });
 
         var percentString = function () {
