@@ -2,7 +2,7 @@
   function seekBar($document) {
 
     var calculatePercent = function(seekBar, event) {
-      var offsetX = event.pageX = seekBar.offset().left;
+      var offsetX = event.pageX - seekBar.offset().left;
       var seekBarWidth = seekBar.width();
       var offsetXPercent = offsetX / seekBarWidth;
       offsetXPercent = Math.max(0, offsetXPercent);
@@ -62,17 +62,20 @@
             });
           });
 
-          var notifyOnChange = function(newValue) {
-            if (typeof scope.onChange == 'function') {
-              scope.onChange({value: newValue});
-            }
-          };
+
 
           $document.bind('mouseup.thumb', function() {
               $document.unbind('mousemove.thumb');
               $document.unbind('mouseup.thumb');
           });
         };
+
+        var notifyOnChange = function(newValue) {
+          if (typeof scope.onChange == 'function') {
+            scope.onChange({value: newValue});
+          }
+        };
+
       }
     }
   }
