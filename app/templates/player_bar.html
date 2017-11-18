@@ -1,39 +1,34 @@
 <section class="player-bar" ng-controller="PlayerBarCtrl as playerBar">
-  <div class-"container">
+
+  <div class="container">
+
     <div class="control-group main-controls">
-      <a class="previous"
-        ng-click="playerBar.songPlayer.previous()">
-          <span class="ion-skip-backward">
-          </span>
-      </a>
+      <a class="previous" ng-click="playerBar.songPlayer.previous()"><span class="ion-skip-backward"></span></a>
       <a class="play-pause">
-        <span class="ion-play"
-          ng-show="!playerBar.songPlayer.currentSong.playing"
-          ng-click="playerBar.songPlayer.play()">
-        </span>
-        <span class="ion-pause"
-          ng-show="playerBar.songPlayer.currentSong.playing"
-          ng-click="playerBar.songPlayer.pause()">
-        </span>
+        <span class="ion-play" ng-show="!playerBar.songPlayer.currentSong.isPlaying" ng-click="playerBar.songPlayer.play()"> </span>
+        <span class="ion-pause" ng-show="playerBar.songPlayer.currentSong.isPlaying" ng-click="playerBar.songPlayer.pause()"> </span>
       </a>
-      <a class="next"
-          ng-click="playerBar.songPlayer.next()">
-        <span class="ion-skip-forward"></span>
-      </a>
+      <a class="next" ng-click="playerBar.songPlayer.next()"> <span class="ion-skip-forward"></span> </a>
     </div>
+
     <div class="control-group currently-playing">
       <h2 class="song-name">{{ playerBar.songPlayer.currentSong.title }}</h2>
       <h2 class="artist-song-mobile"></h2>
-      <h3 calss="artist-name">{{ playerBar.songPlayer.currentSong.artist}}</h3>
+      <h3 class="artist-name">{{ playerBar.albumData.artist }}</h3>
       <div class="seek-control">
         <seek-bar value="{{ playerBar.songPlayer.currentTime }}" max="{{ playerBar.songPlayer.currentSong.duration }}" on-change="playerBar.songPlayer.setCurrentTime(value)" ></seek-bar>
-      </div>
-      <div class="current-time" isEnded="{{ playerBar.songPlayer.isEnded() }}">{{ playerBar.songPlayer.currentTime | timecode }}</div>
-      <div class="total-time">{{ playerBar.songPlayer.currentSong.duration | timecode}}</div>
+        <div class="current-time" isEnded="{{ playerBar.songPlayer.isEnded() }}">{{ playerBar.songPlayer.currentTime | timecode }}</div>
+        <div class="total-time">{{ playerBar.songPlayer.currentSong.duration | timecode}}</div>
     </div>
-    <div class="control-group volume">
-      <span class="icon ion-volume-high"></span>
+    </div>
+
+    <div class="control-group volume"
+      ng-mouseover="hovered = true"
+      ng-mouseleave="hovered = false">
+      <span class="icon ion-volume-mute" ng-show="playerBar.songPlayer.muted" ng-click="playerBar.songPlayer.unmute()"></span>
+      <span class="icon ion-volume-high" ng-click="playerBar.songPlayer.mute()" ng-show="!playerBar.songPlayer.muted" ></span>
       <seek-bar value="{{ playerBar.songPlayer.volume }}" max="{{ 100 }}" on-change="playerBar.songPlayer.setVolume(value)"></seek-bar>
+
     </div>
   </div>
 </section>

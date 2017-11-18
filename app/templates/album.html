@@ -15,17 +15,17 @@
     ng-mouseleave="hovered = false"
     ng-repeat="song in album.albumData.songs track by $index">
       <td class="song-item-number">
-        <span ng-show="!song.playing && !hovered">
+        <span ng-show="!song.isPlaying && !hovered">
           {{ $index + 1 }}
         </span>
         <a class="album-song-button"
-          ng-show="!song.playing && hovered"
+          ng-show="!song.isPlaying && hovered"
           ng-click="album.songPlayer.play(song)">
           <span class="ion-play">
           </span>
         </a>
         <a class="album-song-button"
-          ng-show="song.playing"
+          ng-show="song.isPlaying"
           ng-click="album.songPlayer.pause(song)">
           <span class="ion-pause">
           </span>

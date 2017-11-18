@@ -21,6 +21,7 @@
         scope.value = 0;
         scope.max = 100;
         scope.isEnded = false;
+        scope.mute = false;
 
         var seekBar = $(element);
 
@@ -35,6 +36,10 @@
         attributes.$observe('isEnded', function(newValue){
           scope.isEnded = newValue;
         });
+
+        attributes.$observe('mute', function(newValue) {
+          scope.mute = newValue;
+        })
 
         var percentString = function () {
           var value = scope.value;
