@@ -115,7 +115,7 @@
         if (SongPlayer.isPaused === true){
           console.log("song was paused");
           SongPlayer.setCurrentTime(SongPlayer.pausedTime);
-          isPaused = false;
+          SongPlayer.isPaused = false;
         }
       } else {
         if (SongPlayer.currentSong !== null) {
@@ -123,12 +123,17 @@
         }
         song = song || SongPlayer.currentSong;
         if (SongPlayer.currentSong !== song){
-
-          if (SongPlayer.currentSong !== null){
-            console.log(SongPlayer.currentSong);
-          }
+          SongPlayer.currentSong = song;
           setSong(song);
           playSong(song);
+        } else {
+          setSong(SongPlayer.currentSong);
+          playSong(SongPlayer.currentSong);
+          if (SongPlayer.isPaused === true){
+            console.log("song was paused");
+            SongPlayer.setCurrentTime(SongPlayer.pausedTime);
+            SongPlayer.isPaused = false;
+          }
         }
       }
     };
